@@ -5,7 +5,7 @@
 // 5 -> Пятница
 
 Console.Write("Введите число: ");
-int num = Convert.ToInt16(Console.ReadLine());
+int num = Convert.ToInt32(Console.ReadLine());
 switch (num)
 {
     case 1: Console.WriteLine("Понедельник"); break;
