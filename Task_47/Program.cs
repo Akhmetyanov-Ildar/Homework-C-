@@ -3,8 +3,7 @@
 // 0,5 7 -2 -0,2
 // 1 -3,3 8 -9,9
 // 8 7,8 -7,1 9
-// Random rnd = new Random();
-// double [,] A = new double [m,n];
+
 
 Console.Clear();
 double[,] CreateMatrixRndInt(int m, int n)
