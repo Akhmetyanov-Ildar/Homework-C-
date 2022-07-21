@@ -6,65 +6,51 @@
 // 10 09 08 07
 
 
-int[,] CreateMatrixRndInt(int m, int n)
+int[,] array = {{1,2,3,4,},
+{5,6,7,8,},
+{9,10,11,12,},
+{13,14,15,16,}};
+
+int[,] CreateMatrixRndInt(int[,] arr)
 {
-    int[,] arr = new int[m, n];
-    Random random = new Random();
-    for (int i = 0; i < arr.GetLength(0); i++)
+    int w = 4;
+    int h = 4;
+    int counter = 1;
+    int startCol = 0;
+    int endCol = w - 1;
+    int startRow = 0;
+    int endRow = h - 1;
+
+    while (startCol <= endCol && startRow <= endRow)
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int i = startCol; i <= endCol; i++)
         {
-            arr[i, j] = random.Next(1, 16);
+            arr[startRow, i] = counter;
+            counter++;
         }
+        startRow++;
+        for (int j = startRow; j <= endRow; j++)
+        {
+            arr[j, endCol] = counter;
+            counter++;
+        }
+        endCol--;
+        for (int i = endCol; i >= startCol; i--)
+        {
+            arr[endRow, i] = counter;
+            counter++;
+        }
+        endRow--;
+        for (int i = endRow; i >= startRow; i--)
+        {
+            arr[i, startCol] = counter;
+            counter++;
+        }
+        startCol++;
     }
     return arr;
 }
 
-
-void SortBySpiralMatrix(int[,] arr)
-{
-    int i;
-    int startRowIndex = 0;
-    int startColumnIndex = 0;
-    int endRowIndex = arr.GetLength(0);
-    int endColumnIndex = arr.GetLength(1);
-
-    while (startRowIndex < endRowIndex && startColumnIndex < endColumnIndex)
-    {
-        for (i = startColumnIndex; i < endColumnIndex; i++)
-        {
-            Console.Write(arr[startRowIndex, i] + " ");
-        }
-        startRowIndex++;
-
-        for (i = startRowIndex; i < endRowIndex; i++)
-        {
-            Console.Write(arr[i, endColumnIndex - 1] + " ");
-        }
-
-        endColumnIndex--;
-
-        if (startRowIndex < endRowIndex)
-        {
-            for (i = endColumnIndex - 1; i >= startColumnIndex; i--)
-            {
-                Console.Write(arr[endRowIndex - 1, i] + " ");
-            }
-            endRowIndex--;
-        }
-
-        if (startColumnIndex < endColumnIndex)
-        {
-            for (i = endRowIndex - 1; i >= startRowIndex; i--)
-            {
-                Console.Write(arr[i, startColumnIndex] + " ");
-            }
-            startColumnIndex++;
-        }
-
-    }
-
-}
 
 
 void PrintMatrix(int[,] arr)
@@ -81,10 +67,9 @@ void PrintMatrix(int[,] arr)
     }
 }
 
-int[,] arrayCreate = CreateMatrixRndInt(4, 4);
-PrintMatrix(arrayCreate);
+PrintMatrix(array);
 Console.WriteLine();
-SortBySpiralMatrix(arrayCreate);
-
+CreateMatrixRndInt(array);
+PrintMatrix(array);
 
 
