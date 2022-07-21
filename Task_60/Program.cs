@@ -7,73 +7,48 @@
 // 26(1,0,1) 55(1,1,1)
 
 
-
-// int[,] arr = new int[w, h];
-
-int[,] array = {{1,2,3,4,},
-{5,6,7,8,},
-{9,10,11,12,},
-{13,14,15,16,}};
-
-int[,] CreateMatrixRndInt(int[,] arr)
+int[,,] CreateMatrixRndInt(int m, int n, int l)
 {
-    int w = 4;
-    int h = 4;
-    int counter = 1;
-    int startCol = 0;
-    int endCol = w - 1;
-    int startRow = 0;
-    int endRow = h - 1;
-
-    while (startCol <= endCol && startRow <= endRow)
+    List<int> list = new List<int>();
+    int[,,] arr = new int[m, n, l];
+    Random random = new Random();
+    for (int i = 0; i < arr.GetLength(0); i++)
     {
-        for (int i = startCol; i <= endCol; i++)
+        for (int j = 0; j < arr.GetLength(1); j++)
         {
-            arr[startRow, i] = counter;
-            counter++;
+            for (int k = 0; k < arr.GetLength(2); k++)
+            {
+                bool flag = false;
+                while (flag == false)
+                {
+                    int number = random.Next(10, 99);
+                    if (!list.Contains(number))
+                    {
+                        list.Add(number);
+                        arr[i, j, k] = number;
+                        flag = true;
+                    }
+                }
+            }
         }
-        startRow++;
-        for (int j = startRow; j <= endRow; j++)
-        {
-            arr[j, endCol] = counter;
-            counter++;
-        }
-        endCol--;
-        for (int i = endCol; i >= startCol; i--)
-        {
-            arr[endRow, i] = counter;
-            counter++;
-        }
-        endRow--;
-        for (int i = endRow; i >= startRow; i--)
-        {
-            arr[i, startCol] = counter;
-            counter++;
-        }
-        startCol++;
     }
     return arr;
 }
 
-
-
-void PrintMatrix(int[,] arr)
+void PrintMatrix(int[,,] arr)
 {
     for (int i = 0; i < arr.GetLength(0); i++)
     {
         for (int j = 0; j < arr.GetLength(1); j++)
         {
-            if (j == 0) Console.Write("|");
-            if (j < arr.GetLength(1) - 1) Console.Write($"{arr[i, j],3} | ");
-            else Console.Write($"{arr[i, j],3} | ");
+            for (int k = 0; k < arr.GetLength(2); k++)
+            {
+                Console.Write($"{arr[i, j, k],3}" + " (" + i + "," + j + "," + k + ")");
+            }
+            Console.WriteLine();
         }
-        Console.WriteLine();
     }
 }
-
-PrintMatrix(array);
-Console.WriteLine();
-CreateMatrixRndInt(array);
-PrintMatrix(array);
-
+int[,,] matrix1 = CreateMatrixRndInt(2, 2, 2);
+PrintMatrix(matrix1);
 
