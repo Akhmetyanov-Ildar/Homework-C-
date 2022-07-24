@@ -18,4 +18,9 @@ void NaturalNumber(int number)
         NaturalNumber(number - 1);
     }
 
+    if (number < 1)
+    {
+        Console.Write("Введено число меньше 1");
+    }
+
 }
